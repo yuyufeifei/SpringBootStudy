@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>NeuBoard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <!-- Fonts  -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/simple-line-icons.css}">
+    <!-- Switchery -->
+    <link rel="stylesheet" th:href="@{/css/switchery.min.css}">
+    <!-- CSS Animate -->
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <!-- DataTables-->
+    <link rel="stylesheet" th:href="@{/css/dataTables.css}">
+    <!-- Custom styles for this theme -->
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <!-- Feature detection -->
+    <script th:src="@{/js/modernizr-2.6.2.min.js}"></script>
+</head>
+
+<body>
+    <section id="main-wrapper" class="theme-default">
+
+        <div th:replace="~{commons/commons :: #header}"></div>
+        <div th:replace="~{commons/commons :: sidebarleft(active='list.html')}"></div>
+        <!--main content start-->
+        <section class="main-content-wrapper">
+            <div class="pageheader">
+                <h1>Form Components </h1>
+                <div class="breadcrumb-wrapper hidden-xs">
+                    <span class="label">You are here:</span>
+                    <ol class="breadcrumb">
+                        <li><a href="index.html">Dashboard</a>
+                        </li>
+                        <li>Forms</li>
+                        <li class="active">Form Components</li>
+                    </ol>
+                </div>
+            </div>
+            <section id="main-content" class="animated fadeInUp">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">修改 </h3>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-expand"></i>
+                                    <i class="fa fa-chevron-down"></i>
+                                    <i class="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <form class="form-horizontal form-border" th:action="@{'/emp/'+${emp.id}}" method="post">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">姓名：</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="lastName" class="form-control" th:value="${emp.lastName}">
+                                            <input type="hidden" name="id" th:value="${emp.id}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">邮箱：</label>
+                                        <div class="col-sm-6">
+                                            <input type="email" name="email" class="form-control" th:value="${emp.email}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">性别：</label>
+                                        <div class="col-sm-6">
+                                            <label class="radio-inline">
+                                                <input class="icheck" type="radio" th:checked="${emp.gender==1}" name="gender" value="1">男
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input class="icheck" type="radio" th:checked="${emp.gender==0}" name="gender" value="0">女
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">部门：</label>
+                                        <div class="col-sm-6">
+                                            <select class="form-control" name="department.id">
+                                                <option
+                                                        th:each="dept:${departments}"
+                                                        th:text="${dept.getDepartmentName()}"
+                                                        th:value="${dept.getId()}"
+                                                        th:selected="${dept.id==emp.department.id}">
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">生日：</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="birth" class="form-control" th:value="${#dates.format(emp.birth,'yyyy-MM-dd')}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-3 col-sm-6">
+                                            <button type="submit" class="btn btn-primary">修改</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!--main content end-->
+    </section>
+    <div th:replace="~{commons/commons :: #sidebar-right}"></div>
+    <div th:replace="~{commons/commons :: #config}"></div>
+    <!--Global JS-->
+    <script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery.navgoco.min.js}"></script>
+    <script th:src="@{/js/switchery.min.js}"></script>
+    <script th:src="@{/js/pace.min.js}"></script>
+      <script th:src="@{/js/jquery.fullscreen-min.js}"></script>
+    <script th:src="@{/js/app.js}"></script>
+    <!--Page Leve JS -->
+    <script th:src="@{/js/jquery.dataTables.js}"></script>
+    <script th:src="@{/js/dataTables.bootstrap.js}"></script>
+    <script>
+    $(document).ready(function() {
+        $('#example').dataTable();
+    });
+    </script>
+       
+</body>
+
+</html>

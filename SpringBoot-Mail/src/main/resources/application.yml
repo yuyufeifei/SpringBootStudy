@@ -1,0 +1,12 @@
+server:
+  port: 8117
+spring:
+  mail:
+    host: smtp.qq.com
+    username: 964148400@qq.com
+    password: 密码
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true

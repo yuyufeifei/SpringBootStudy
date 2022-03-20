@@ -1,0 +1,9 @@
+server:
+  port: 8118
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379 #默认为6379
+    lettuce:  #使用lettuce连接池
+      pool:
+        enabled: true

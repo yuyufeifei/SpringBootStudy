@@ -1,0 +1,9 @@
+server:
+  port: 8121
+dubbo:
+  application:
+    name: provider-server
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  scan:
+    base-packages: com.gzh.service

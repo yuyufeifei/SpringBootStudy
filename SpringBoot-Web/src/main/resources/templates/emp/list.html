@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>NeuBoard</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <!-- Fonts  -->
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/simple-line-icons.css}">
+    <!-- Switchery -->
+    <link rel="stylesheet" th:href="@{/css/switchery.min.css}">
+    <!-- CSS Animate -->
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <!-- DataTables-->
+    <link rel="stylesheet" th:href="@{/css/dataTables.css}">
+    <!-- Custom styles for this theme -->
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <!-- Feature detection -->
+    <script th:src="@{/js/modernizr-2.6.2.min.js}"></script>
+</head>
+
+<body>
+    <section id="main-wrapper" class="theme-default">
+        <div th:replace="~{commons/commons :: #header}"></div>
+        <div th:replace="~{commons/commons :: sidebarleft(active='list.html')}"></div>
+        <!--main content start-->
+        <section class="main-content-wrapper">
+            <div class="pageheader">
+                <h1>Data Tables</h1>
+                <div class="breadcrumb-wrapper hidden-xs">
+                    <span class="label">You are here:</span>
+                    <ol class="breadcrumb">
+                        <li><a href="../index.html">Dashboard</a>
+                        </li>
+                        <li>Tables</li>
+                        <li class="active">Data Tables</li>
+                    </ol>
+                </div>
+            </div>
+            <section id="main-content" class="animated fadeInUp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    Data Tables
+                                    <a class="btn btn-sm btn-info" th:href="@{/emp}">添加</a>
+                                </h3>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-expand"></i>
+                                    <i class="fa fa-chevron-down"></i>
+                                    <i class="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                            <th>Gender</th>
+                                            <th>Department</th>
+                                            <th>Birth</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr th:each="emp:${emps}">
+                                            <!-- 两种方式都可 -->
+                                            <td th:text="${emp.getId()}"></td>
+                                            <td th:text="${emp.lastName}"></td>
+                                            <td th:text="${emp.email}"></td>
+                                            <td th:text="${emp.gender==0?'女':'男'}"></td>
+                                            <td th:text="${emp.department.departmentName}"></td>
+                                            <td th:text="${#dates.format(emp.birth,'yyyy-MM-dd HH:mm:ss')}"></td>
+                                            <td>
+                                                <a type="button" class="btn btn-sm btn-info" th:href="@{'/emp/'+${emp.id}}">编辑</a>
+                                                <a type="button" class="btn btn-sm btn-danger" th:href="@{'/delEmp/'+${emp.id}}">删除</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!--main content end-->
+    </section>
+    <div th:replace="~{commons/commons :: #sidebar-right}"></div>
+    <div th:replace="~{commons/commons :: #config}"></div>
+    <!--Global JS-->
+    <script th:src="@{/js/jquery-1.11.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery.navgoco.min.js}"></script>
+    <script th:src="@{/js/switchery.min.js}"></script>
+    <script th:src="@{/js/pace.min.js}"></script>
+      <script th:src="@{/js/jquery.fullscreen-min.js}"></script>
+    <script th:src="@{/js/app.js}"></script>
+    <!--Page Leve JS -->
+    <script th:src="@{/js/jquery.dataTables.js}"></script>
+    <script th:src="@{/js/dataTables.bootstrap.js}"></script>
+    <script>
+    $(document).ready(function() {
+        $('#example').dataTable();
+    });
+    </script>
+       
+</body>
+
+</html>

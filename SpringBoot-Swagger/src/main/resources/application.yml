@@ -1,0 +1,12 @@
+server:
+  port: 8116
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  profiles:
+    active: prod
+
+# 请求路径与 Spring MVC 处理映射匹配的默认策略已从AntPathMatcher更改为PathPatternParser
+
+# 启动参数里设置了dev
